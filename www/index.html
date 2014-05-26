@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html><!--HTML5 doctype-->
+
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta http-equiv="Pragma" content="no-cache">
+<script type="text/javascript" charset="utf-8" src="intelxdk.js"></script>
+<script type="text/javascript" language="javascript">
+    var isIntel=window.intel&&window.intel.xdk
+    // This event handler is fired once the intel libraries are ready
+    function onDeviceReady() {
+        //hide splash screen now that our app is ready to run
+        intel.xdk.device.hideSplashScreen();
+        setTimeout(function () {
+            $.ui.launch();
+        }, 50);
+    }
+    //initial event handler to detect when intel is ready to roll
+    document.addEventListener("intel.xdk.device.ready", onDeviceReady, false);
+</script>
+<script src="js/appframework.ui.min.js"></script>
+<script>
+    if(isIntel)
+        $.ui.autoLaunch = false;
+    $.ui.useOSThemes = true; //Change this to false to force a device theme
+    $.ui.blockPageScroll();
+    $(document).ready(function () {
+        if ($.ui.useOSThemes && (!$.os.ios||$.os.ios7))
+            $("#afui").removeClass("ios");
+    });
+</script>
+<script src="js/luckpredict.js"></script>
+<link href="css/icons.css" rel="stylesheet" type="text/css">
+<link href="css/af.ui.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div id="afui" class="ios">
+    <div id="header" class="header"></div>
+    <div id="content" style="">
+        <div class="panel" title="LUCK PREDICT" data-nav="nav_0" id="luck_predict" selected="selected"
+        style="" data-appbuilder-object="page">
+            <div class="section_parent" style="" data-appbuilder-object="container">
+                <section id="section_container" class="" style="">
+                    <div class="container_col1" data-appbuilder-object="container"><a class="button" href="#predict_option" style="width: 100%;"
+                        data-appbuilder-object="button" data-transition="slide">Play</a>
+                    </div>
+                    <div class="container_col2" data-appbuilder-object="container"><a class="button" href="#" style="width: 100%;" data-appbuilder-object="button"
+                        data-transition="slide" id="options">Options</a>
+                    </div>
+                    <div class="container_col3" data-appbuilder-object="container"><a class="button" href="#" style="width: 100%;" data-appbuilder-object="button"
+                        data-transition="slide" id="exit">Exit</a>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div class="panel" title="PREDICT OPTION" data-nav="nav_0" id="predict_option"
+        data-appbuilder-object="page" style="">
+            <div class="section_parent" style="" data-appbuilder-object="container">
+                <ul class="list" data-appbuilder-object="list">
+                    <li><a href="#select_priorities" onclick="predict('PREDICT_MOMENT');">Predict Moment</a>
+                    </li>
+                    <li><a href="#select_priorities" onclick="predict('PREDICT_DAY');">Predict Day</a>
+                    </li>
+                    <li><a href="#select_priorities" onclick="predict('PREDICT_WEEK');">Predict Week</a>
+                    </li>
+                    <li><a href="#select_priorities" onclick="predict('PREDICT_MONTH');">Predict Month</a>
+                    </li>
+                    <li><a href="#select_priorities" onclick="predict('PREDICT_YEAR');">Predict Year</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="panel" title="SELECT PRIORITIES" data-nav="nav_0" id="select_priorities"
+        data-appbuilder-object="page" style="">
+            <div class="container" style="width:100%" data-appbuilder-object="container">
+                <div class="select_element form_element" style="width: 100%; overflow: hidden;"
+                data-appbuilder-object="select">
+                    <label for="finance">Finance</label>
+                    <select id="finance">
+                        <option value="1" selected="">High</option>
+                        <option value="2">Medium</option>
+                        <option value="3">Low</option>
+                    </select>
+                </div>
+                <div class="select_element form_element" style="width: 100%; overflow: hidden;"
+                data-appbuilder-object="select">
+                    <label for="love">Love</label>
+                    <select id="love">
+                        <option value="1" selected="">High</option>
+                        <option value="2">Medium</option>
+                        <option value="3">Low</option>
+                    </select>
+                </div>
+                <div class="select_element form_element" style="width: 100%; overflow: hidden;"
+                data-appbuilder-object="select">
+                    <label for="education">Education</label>
+                    <select id="education">
+                        <option value="1" selected="">High</option>
+                        <option value="2">Medium</option>
+                        <option value="3">Low</option>
+                    </select>
+                </div>
+                <div class="select_element form_element" style="width: 100%; overflow: hidden;"
+                data-appbuilder-object="select">
+                    <label for="work">Work</label>
+                    <select id="work">
+                        <option value="1" selected="">High</option>
+                        <option value="2">Medium</option>
+                        <option value="3">Low</option>
+                    </select>
+                </div>
+                <div class="select_element form_element" style="width: 100%; overflow: hidden;"
+                data-appbuilder-object="select">
+                    <label for="travel">Travel</label>
+                    <select id="travel">
+                        <option value="1" selected="">High</option>
+                        <option value="2">Medium</option>
+                        <option value="3">Low</option>
+                    </select>
+                </div>
+            </div>
+            <div class="container" style="width: 100%; display: -webkit-box; -webkit-box-align: center; -webkit-box-orient: vertical;"
+            data-appbuilder-object="container"><a class="button" href="#selected_options" style="" data-appbuilder-object="button"
+                data-transition="slide" id="selectpredict_submit" onclick="priority();">Submit</a>
+            </div>
+        </div>
+        <div class="panel" title="SELECTED OPTIONS" data-nav="nav_0" id="selected_options"
+        data-appbuilder-object="page" style="">
+            <div class="container" style="width:100%" data-appbuilder-object="container"></div>
+            <div class="container" style="width:100%" data-appbuilder-object="container">
+                <a class="button" href="#predict_option" style="position: relative; z-index: 2;"
+                data-appbuilder-object="button" data-transition="slide" id="back">Back</a>
+                <a class="button" href="#luck_predict_game" style="" data-appbuilder-object="button"
+                data-transition="slide" id="next">Next</a>
+            </div>
+        </div>
+        <div class="panel" title="LUCK PREDICT GAME" data-nav="nav_0" id="luck_predict_game"
+        data-appbuilder-object="page" style="">
+            <section id="section_container" class="" style="">
+            </section>
+            <section id="section_container" class="" style="">
+            </section>
+        </div>
+    </div>
+    <div id="navbar" class="footer">
+        <a href="#main" class="icon home">Home</a>
+    </div>
+    <header id="header_0" data-appbuilder-object="header">
+        <a id="backButton" href="#" class="button backButton" style="visibility: visible; ">Back</a>
+        <h1 id="pageTitle" class="">test</h1> 
+    </header>
+    <nav id="nav_0" data-appbuilder-object="nav">
+        <h1>Side Menu</h1>
+    </nav>
+</div>
+</body>
+
+
+
+
+
+</html>
