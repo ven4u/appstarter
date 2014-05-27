@@ -35,7 +35,12 @@ body {
 
 #afui input,textarea { -webkit-user-select:text; -moz-user-select:-moz-text;-moz-user-select:text;} /* allow users to select text that appears in input fields */
 
-#afui img { border:none; } /* Remove default borders for images */
+#afui img {
+	border:none;
+	-webkit-border-radius:3px;
+    -webkit-box-shadow:rgb(110,110,110) 3px 3px 8px;
+
+} /* Remove default borders for images */
 
 
 #afui p {
@@ -3479,7 +3484,7 @@ changerd button colour gradian http://grad3.ecoloniq.jp/
         -webkit-box-shadow:rgb(110,110,110) 8px 8px 8px;
         -webkit-box-align:center;		
         width:inherit;
-        height: 200px;
+        height: inherit;
     }
     #afui .container_col3{  
         margin: 10px;
